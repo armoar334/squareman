@@ -1,6 +1,2 @@
-# THIS PROJECT IS NOT AFFILIATED WITH HAL LABORATORY OR NINTENDO
-# ALL RIGHTS BELONG TO THEIR RESPECTIVE OWNERS
-
 # SquareMan
-## A WIP fanclone of the original 3ds boxboy game
-
+## Legally Distinct boxboy clone
