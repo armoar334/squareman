@@ -62,7 +62,7 @@ function update_qbby_sprite()
 
 	-- Legs
 	-- 5.5 in
-	if ( qbby["legs_state"] == "walking" ) -- drops 1 pixel when walking
+	if ( qbby["legs_state"] == "walking" ) -- drops to 29 pixels high when walking
 	then
 		qbby["walk_frame"] = qbby["walk_frame"] + 1 
 		local walk_frame = qbby["walk_frame"] % 30
@@ -70,11 +70,24 @@ function update_qbby_sprite()
 		-- Ill fix it later
 		if ( walk_frame < 15 )
 		then
-			love.graphics.line(5.5,24, 7 - ( 0.25 * walk_frame ),27)
-			love.graphics.line(18.5,24, 16 + ( 0.25 * walk_frame ),27)
+			knee_off = 0.3 * walk_frame
+			-- Left leg
+			love.graphics.line(5.5,24, 7 - ( 0.3 * walk_frame ),27)
+			love.graphics.line(7 - ( 0.25 * walk_frame ),27, 5 - knee_off, 29 - knee_off)
+			
+			-- Right leg
+			love.graphics.line(18.5,24, 16 + ( 0.3 * walk_frame ),27)
+			love.graphics.line(16 + ( 0.25 * walk_frame ),27, 14 + knee_off, 24 + knee_off)
 		else
-			love.graphics.line(5.5,24, 4 + ( 0.25 * ( walk_frame - 15 ) ),27)
-			love.graphics.line(18.5,24, 20 - ( 0.25 * ( walk_frame - 15 ) ),27)
+			walk_frame = walk_frame - 15
+			knee_off = 0.3 * walk_frame
+			-- Left leg
+			love.graphics.line(5.5,24, 4 + ( 0.3 * walk_frame ) ,27)
+			love.graphics.line(4 + ( 0.25 * walk_frame ),27, 2 + knee_off, 24 + knee_off)
+
+			-- Right leg
+			love.graphics.line(18.5,24, 20 - ( 0.3 * walk_frame ),27)
+			love.graphics.line(20 - ( 0.25 * walk_frame ),27, 18 - knee_off, 29 - knee_off)
 		end
 
 	elseif ( qbby["legs_state"] == "standing")

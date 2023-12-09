@@ -30,7 +30,7 @@ function love.update()
 	-- Movement test, will swap out for proper physics later
 	qbby["legs_state"] = "standing"
 	if love.keyboard.isDown( "s" ) then
-		qbby["ypos"] = qbby["ypos"] + 1
+		qbby["legs_state"] = "none"
 	end
 	if love.keyboard.isDown( "a" ) then
 		qbby["direction"] = "left"
@@ -60,6 +60,21 @@ function love.draw()
 
 	-- Draw to screen
 	love.graphics.setBackgroundColor(255, 255, 255, 1)	
-	love.graphics.draw(qbby["canvas"], qbby["xpos"], qbby["ypos"])
+	if ( qbby["legs_state"] == "walking")
+	then
+		qbby_draw_offset = 1
+	elseif ( qbby["legs_state"] == "none" )
+	then
+		qbby_draw_offset = 6
+	else
+		qbby_draw_offset = 0
+	end
+
+	if ( qbby["direction"] == "left" )
+	then
+		love.graphics.draw(qbby["canvas"], qbby["xpos"], qbby["ypos"] + qbby_draw_offset, 0, -1, 1, 24)
+	else
+		love.graphics.draw(qbby["canvas"], qbby["xpos"], qbby["ypos"] + qbby_draw_offset)
+	end
 	love.graphics.draw(boxes["canvas"], qbby["xpos"] - 144, qbby["ypos"] - 144) -- minus 120 so qbby is in middle
 end
